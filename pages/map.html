@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Map</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <meta name="twitter:card" content="summary">
+
+    <meta property="og:type" content="article">
+
+
+    <link href="http://www.barryhikesthepct.com/" rel="shortcut icon" type="image/x-icon">
+    <link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link href="//fonts.googleapis.com/" rel="dns-prefetch">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://www.barryhikesthepct.com/theme/css/main.css" />
+    <link rel="stylesheet" href="http://www.barryhikesthepct.com/theme/css/custom.css" />
+    <link rel="stylesheet" href="http://www.barryhikesthepct.com/theme/css/lightbox.css" />
+
+
+    <script src="http://www.barryhikesthepct.com/theme/js/jquery.min.js"></script>
+    <script src="http://www.barryhikesthepct.com/theme/js/modernizr.custom.min.js"></script>
+
+    <script src="http://www.barryhikesthepct.com/theme/js/imageLoader.js"></script>
+    <script src="http://www.barryhikesthepct.com/theme/js/drawer.js"></script>
+    <script src="http://www.barryhikesthepct.com/theme/js/scripts.js"></script>
+    <script src="http://www.barryhikesthepct.com/theme/js/lightbox.min.js"></script>
+
+  <meta property="og:image" content="route.png" />
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <style>
+    html, body, #map { margin: 0; height: 100%; background: #fff; }
+    .wrapper-container {
+      height: 100%;
+      padding: 0px;
+      margin: 0px;
+      max-width: 100%;
+    }
+
+    @media only screen and (max-width:1023px) {
+
+     .wrapper-container, #map {
+        height: 500px;
+      }
+    }
+    .leaflet-marker-live {
+      -webkit-animation: pulse 2s ease-out;
+      animation: pulse 2s ease-out;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+    }
+    @-webkit-keyframes pulse {
+      from { stroke-width: 15; stroke-opacity: 1; }
+      to { stroke-width: 50; stroke-opacity: 0; }
+    }
+    @keyframes pulse {
+      from { stroke-width: 15; stroke-opacity: 1; }
+      to { stroke-width: 50; stroke-opacity: 0; }
+    }
+  </style>
+
+
+        <link href="http://www.barryhikesthepct.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Barry Hikes The PCT RSS Feed" />
+
+  </head>
+  <body>
+
+
+    <button class="drawer-button" id="drawer-button" data-action="open-drawer"><i class="fa fa-bars"></i></button>
+    <div class="drawer-overlay"></div>
+    <nav class="drawer" tabindex="-1">
+      <div class="drawer-container">
+        <!--.drawer-search(role="search")-->
+        <ul class="drawer-list" role="navigation">
+
+          <li class="drawer-list-item">
+            <a data-pjax="" href="http://www.barryhikesthepct.com/">
+              <i class="fa fa-home"></i>Home
+            </a>
+          </li>
+
+
+          <li class="drawer-list-divider"></li>
+
+            <li class="drawer-list-item drawer-list-title">Pages</li>
+              <li class="drawer-list-item">
+                <a href="http://www.barryhikesthepct.com/pages/about.html">
+                  <i class="fa fa-file"></i>About
+                </a>
+              </li>
+              <li class="drawer-list-item">
+                <a href="http://www.barryhikesthepct.com/pages/gear.html">
+                  <i class="fa fa-file"></i>Gear
+                </a>
+              </li>
+              <li class="drawer-list-item">
+                <a href="http://www.barryhikesthepct.com/pages/map.html">
+                  <i class="fa fa-file"></i>Map
+                </a>
+              </li>
+              <li class="drawer-list-item">
+                <a href="http://www.barryhikesthepct.com/pages/resupply.html">
+                  <i class="fa fa-file"></i>Resupply
+                </a>
+              </li>
+            <li class="drawer-list-divider"></li>
+
+
+          <li class="drawer-list-item drawer-list-title">Follow</li>
+            <li class="drawer-list-item">
+              <a data-pjax="" href="https://twitter.com/barrywainstock" target="_blank">
+                <i class="fa fa-twitter"></i> Twitter
+              </a>
+            </li>
+            <li class="drawer-list-item">
+              <a data-pjax="" href="https://instagram.com/bwainstock" target="_blank">
+                <i class="fa fa-instagram"></i> Instagram
+              </a>
+            </li>
+            <li class="drawer-list-item">
+              <a data-pjax="" href="https://www.facebook.com/barrywainstock" target="_blank">
+                <i class="fa fa-facebook"></i> Facebook
+              </a>
+            </li>
+            <li class="drawer-list-item">
+              <a data-pjax="" href="http://www.barryhikesthepct.com/feeds/all.rss.xml" target="_blank">
+                <i class="fa fa-rss"></i> RSS
+              </a>
+            </li>
+
+
+          </ul>
+        </div>
+      </nav>
+
+    <main id="container" role="main" class="container">
+      <div class="surface">
+        <div class="surface-container">
+          <div data-pjax-container class="content">
+
+
+              <aside role="banner" class="cover">
+                <div data-load-image="http://www.barryhikesthepct.com/images/cover.jpg"  class="cover-image"></div>
+                <div class="cover-container">
+                  <a href="http://www.barryhikesthepct.com" class="cover-logo" data-pjax>
+                    <img src="http://www.barryhikesthepct.com/images/logo.jpg" alt="Blog Logo">
+                  </a>
+                  <h1 class="cover-title">Barry Hikes The PCT</h1>
+                </div>
+              </aside>
+
+
+
+              <section class="wrapper" tabindex="0">
+                <div class="wrapper-container">
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<link rel="stylesheet" href="http://www.barryhikesthepct.com/theme/css/MarkerCluster.css" />
+<link rel="stylesheet" href="http://www.barryhikesthepct.com/theme/css/Leaflet.Instagram.css" />
+<div id="map"></div>
+  
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <script src="http://www.barryhikesthepct.com/theme/js/reqwest.min.js"></script>
+  <script src="http://www.barryhikesthepct.com/theme/js/Leaflet.MakiMarkers.js"></script>
+  <script src="http://www.barryhikesthepct.com/theme/js/Leaflet.SpotTracker.js"></script>
+  <script src="http://www.barryhikesthepct.com/theme/js/leaflet.markercluster.js"></script>
+  <script src="http://www.barryhikesthepct.com/theme/js/Leaflet.Instagram.Cluster.js"></script>
+  <script>
+  var feed = decodeURI((RegExp('feed=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]);
+  var map = L.map('map', { zoomControl: false }).setView([45.5, -122.4], 7);
+  var attrib = 'Maps © <a href="http://www.thunderforest.com">Thunderforest</a>, Data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>';
+  
+  L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png', {
+    attribution: attrib,
+  }).addTo(map);
+
+  var spot = L.spotTracker(feed, {
+    api: 'http://bwainstock.cartodb.com/api/v2/sql',
+    url: "{api}?q=SELECT * FROM test WHERE feedid = '0hhvvy86u7pTm6F1UytYEAj2uhyXUOt1u' ORDER BY unixtime",
+    // url: "{api}?q=SELECT * FROM test WHERE unixtime >= 1426359202 ORDER BY unixtime",
+    liveUrl: "{api}?q=SELECT * FROM pct_spot WHERE unixtime > {timestamp} ORDER BY unixtime",
+    OK: {
+      icon: L.MakiMarkers.icon({ icon: 'building',  color: '#145291', size: 'm' }),
+      title: 'Hytte'
+    },
+    CUSTOM: {
+      icon: L.MakiMarkers.icon({ icon: 'campsite', color: '#145291', size: 'm' }),
+      title: 'Telt'
+    },
+    onClick: function (evt) {
+      var message = evt.message;
+      evt.layer.bindPopup(getTime(message.unixtime)).openPopup();
+    },
+    show: {
+      'UNLIMITED-TRACK': 10,
+      'OK': 10,
+      'CUSTOM': 10
+    }
+  }).addTo(map);
+
+  var insta = L.instagram('https://api.instagram.com/v1/users/361018940/media/recent/?access_token=361018940.467ede5.ab481cfcaafd4454a1ea333429e3d3c7');
+
+  var InstagramLayer = {"<span class='fa fa-instagram'></span>": insta };
+
+  new L.control.layers(null, InstagramLayer, { collapsed: false }).addTo(map);
+
+  new L.Control.Zoom({ position: 'topright' }).addTo(map);
+
+
+  function getTime (timestamp) {
+    var t = new Date(timestamp * 1000);
+    return L.Util.template('<p>{month} {date}, {year} {hours}:{minutes}</p>', {
+      date: t.getDate(),
+      month: ['January','February','March','April','May','June','July','August','September','October','November','December'][t.getMonth()],
+      year: t.getFullYear(),
+      hours: t.getHours(),
+      minutes: ('0' + t.getMinutes()).slice(-2)
+    });
+  }
+  </script>
+
+<footer class="footer" role="contentinfo">
+  <small>
+    <p>
+      Barry Hikes The PCT |  |
+        Barry Wainstock
+    </p>
+    <p>
+      <a href="https://github.com/qmcs/pelicanium">Pelicanium</a>, a theme based on
+      <a href="http://ghostium.oswaldoacauan.com/">Ghostium Theme</a>.
+      Proudly powered by  <a href="http://getpelican.com/">Pelican</a>.
+    </p>
+  </small>
+</footer>                </div>
+              </section>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="http://www.barryhikesthepct.com/theme/js/56c2364f.foot-scripts.min.js"></script>
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-56109557-2']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'barryhikesthepct';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+  </body>
+</html>
